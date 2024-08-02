@@ -1,10 +1,54 @@
 ---
-const {frontmatter} = Astro.props;
+const { title } = Astro.props;
 ---
+
 <html>
-  <!-- ... -->
-  <h1>{frontmatter.title}</h1>
-  <p>{frontmatter.description}</p>
-  <slot /> <!-- Markdown content is injected here -->
-   <!-- ... -->
+  <body class="container mx-auto px-44 py-10">
+    <h1 class="text-6xl font-semibold text-white text-center mb-1">{title}</h1>
+    <slot />
+    <!-- Markdown content is injected here -->
+    <!-- ... -->
+  </body>
 </html>
+
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    background: #13151a;
+    background-size: 224px;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+  h2 {
+    font-size: 2em;
+    margin: 10px 0;
+  }
+
+  h3 {
+    font-size: 1.5em
+  }
+
+  p {
+    font-size: 1.22em;
+  }
+</style>

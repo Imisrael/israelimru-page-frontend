@@ -1,30 +1,62 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 
-import fetchApi from '../lib/strapi';
-import type Article from '../interfaces/article';
+import fetchApi from "../lib/strapi";
+import type Article from "../interfaces/article";
 
 const articles = await fetchApi<Article[]>({
-  endpoint: 'articles', // the content type to fetch
-  wrappedByKey: 'data', // the key to unwrap the response
+	endpoint: "articles", // the content type to fetch
+	wrappedByKey: "data", // the key to unwrap the response
 });
 
+const fixstars = {
+	title: "Software Engineer @ Fixstars Solutions, Inc.",
+	link: "https://us.fixstars.com/",
+	body: `In charge of Technical Marketing for GridDB, entails backend and frontend development work, mostly using React and Java. Also requires direct communication with customer. Also entails managing remote freelancers and their work.`,
+	color: "#23262d"
+};
+
+const projects = [
+	{
+		title: "GridLog",
+		link: "https://github.com/griddbnet/gridlog/tree/part-iii",
+		body: `Full Stack application using: GridDB, Spring Boot, React.js. It polls log files on host machine, takes the raw logs, saves into DB, then takes the raw logs from the DB, parses it, and converts into fieldable logs using regex. Log Viewer allows you to see these logs and to query them with a query builder. Still WIP`,
+		color: "#4a6002" 
+	},
+];
 ---
 
 <Layout title="Israel Imru">
 	<main>
-		<h1>Israel Imru -- Under Construction</h1>
-		<ul>
+		<h1>Israel Imru</h1>
+
+		<h2> Employment </h2>
+		<Card
+			href={fixstars.link}
+			title={fixstars.title}
+			body={fixstars.body}
+			color={fixstars.color}
+		/>
+		<h3> Projects</h3>
+		<Card
+			href={projects[0].link}
+			title={projects[0].title}
+			body={projects[0].body}
+			color={projects[0].color}
+		/>
+
+		<!-- <ul>
 			{
-			  articles.map((article) => (
-				<li>
-				  <a href={`/blog/${article.attributes.slug}/`}>
-					{article.attributes.title}
-				  </a>
-				</li>
-			  ))
+				articles.map((article) => (
+					<li>
+						<a href={`/blog/${article.attributes.slug}/`}>
+							{article.attributes.title}
+						</a>
+					</li>
+				))
 			}
-		  </ul>
+		</ul> -->
 	</main>
 </Layout>
 
@@ -53,36 +85,5 @@ const articles = await fetchApi<Article[]>({
 		line-height: 1;
 		text-align: center;
 		margin-bottom: 1em;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
 	}
 </style>

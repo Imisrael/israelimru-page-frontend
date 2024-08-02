@@ -1,13 +1,14 @@
 ---
-import fetchApi from '../../lib/strapi';
-import type Article from '../../interfaces/article';
+import fetchApi from "../../lib/strapi";
+import type Article from "../../interfaces/article";
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 
 import { marked } from "marked";
 
 export async function getStaticPaths() {
   const articles = await fetchApi<Article[]>({
-    endpoint: 'articles',
-    wrappedByKey: 'data',
+    endpoint: "articles",
+    wrappedByKey: "data",
   });
 
   return articles.map((article) => ({
@@ -20,19 +21,14 @@ type Props = Article;
 const article = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>{article.attributes.title}</title>
-  </head>
 
-  <body>
-    <main>
 
-      <h1>{article.attributes.title}</h1>
+<BlogPostLayout title={article.attributes.title}>
+  <main class="m-auto text-white">
+    <Fragment set:html={marked.parse(article.attributes.content)} />
+  </main>
+</BlogPostLayout>
 
-      <!-- Render html -->
-      <Fragment set:html={marked.parse(article.attributes.content)} />
-    </main>
-  </body>
-</html>
+<style>
+
+</style>
