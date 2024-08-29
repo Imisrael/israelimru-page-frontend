@@ -1,0 +1,97 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+
+const books = [
+    {
+        src: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1539509558i/38530663.jpg",
+        alt: "Frederick Douglass: Prophet of Freedom",
+    },
+    {
+        src:"https://c.media-amazon.com/images/I/51l7V4G341L._SY445_SX342_.jpg",
+        alt:"Children of Time"
+    }
+]
+
+const games = [
+    {
+        src: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSv67z9OqXzLS_z5loH7J43Ot2h3RG4KgYoPeRfC3_c_RfUxods",
+        alt: "Tears of the Kingdom",    
+    },
+    {
+        src: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS9QDPgOYMJEuEvBrBGcLs79suiUqGO2NvhM6v-l2ShlTNifSTJ",
+        alt: "Dead Cells",    
+    },
+    {
+        src: "https://upload.wikimedia.org/wikipedia/en/4/45/Metroid_Fusion_box.jpg",
+        alt: "Metroid Fusion",    
+    },
+    {
+        src: "https://upload.wikimedia.org/wikipedia/en/5/51/Overwatch_cover_art.jpg",
+        alt: "Overwatch",    
+    },
+
+    
+]
+---
+
+<Layout title="About">
+    <main>
+        <h1>About</h1>
+
+        <h2 class="text-3xl text-blue-100 font-semibold"> Interests </h2>
+        <div class="my-10">
+            <p class="text-2xl">Video games, books, cooking shows, dogs, watching sports (NFL, NBA), retrohandhelds, tinkering, VR, comedy</p>
+        </div>
+        
+
+            <span class="my-6 text-blue-300 text-3xl">Currently Reading  </span>
+            <div class="flex flex-row mx-24 my-10 ">
+
+                {
+                    books.map(book => (
+                        <div class="flex mx-3">
+                            <Image src={book.src} alt={book.alt} height="200" width="200" >
+                        </div>
+                        )
+                    )
+                }
+             </div>
+        <div>
+            <span class="my-6 text-blue-300 text-3xl">Currently Playing  </span>
+            <div class="flex flex-row flex-wrap mx-24 my-10 ">
+
+                {
+                    games.map(game => (
+                        <div class="flex m-4">
+                            <Image src={game.src} alt={game.alt} height="300" width="300" >
+                        </div>
+                        )
+                    )
+                }
+             </div>
+        </div>
+
+    </main>
+
+</Layout>
+
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 1400px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+</style>
