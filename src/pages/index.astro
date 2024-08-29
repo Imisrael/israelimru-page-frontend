@@ -33,7 +33,7 @@ const projects = [
 	{
 		title: "This website",
 		link: "/",
-		body: `Portfolio type website. Built with Astro, CMS built with Strapi on Railway`,
+		body: `Portfolio type website. Built with Astro, CMS built with Strapi on Railway, static content hosted on Netlify`,
 		color: "#4a6002" 
 	}
 ];
@@ -77,7 +77,7 @@ const projects = [
 
 <div class="mx-3 my-20"> 
 		<h2 class="text-neutral-200 text-3xl my-5"> Blogs</h2>
-		<ol class="list-decimal  ">
+		<ol class="list-decimal">
 			{
 				articles.map((article) => (
 					<li class="my-2 text-blue-200 hover:text-sky-400">
@@ -87,6 +87,8 @@ const projects = [
 					</li>
 				))
 			}
+
+
 		</ol>
 		</div>
 	</main>

@@ -49,12 +49,11 @@ const games = [
             <div class="flex flex-row mx-24 my-10 ">
 
                 {
-                    books.map(book => (
+                    books.map((book) => (
                         <div class="flex mx-3">
-                            <Image src={book.src} alt={book.alt} height="200" width="200" >
+                            <Image src={book.src} alt={book.alt} height="200" width="200" />
                         </div>
-                        )
-                    )
+                        ))
                 }
              </div>
         <div>
@@ -64,7 +63,7 @@ const games = [
                 {
                     games.map(game => (
                         <div class="flex m-4">
-                            <Image src={game.src} alt={game.alt} height="300" width="300" >
+                            <Image src={game.src} alt={game.alt} height="300" width="300" />
                         </div>
                         )
                     )
