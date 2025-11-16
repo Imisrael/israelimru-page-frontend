@@ -1,6 +1,19 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
+
+// I'm adding an "interests" array to make the new layout work
+const interests = [
+    "Video games",
+    "Books",
+    "Cooking",
+    "NFL",
+    "NBA",
+    "Retro Handhelds",
+    "Tinkering",
+    "VR",
+    "Comedy",
+];
 
 const books = [
     {
@@ -8,97 +21,101 @@ const books = [
         alt: "Frederick Douglass: Prophet of Freedom",
     },
     {
-        src:"https://c.media-amazon.com/images/I/51l7V4G341L._SY445_SX342_.jpg",
-        alt:"Children of Time"
+        src: "https://c.media-amazon.com/images/I/51l7V4G341L._SY445_SX342_.jpg",
+        alt: "Children of Time",
     },
     {
-        src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmXx70ykpYjA3TnwXKDwYxiZb_USj8qt2LHQ&s",
-        alt:"Play Nice"
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmXx70ykpYjA3TnwXKDwYxiZb_USj8qt2LHQ&s",
+        alt: "Play Nice",
     },
-]
+];
 
 const games = [
     {
         src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTv1wjEAkSSL5p55TV2h13a23GT8v5Mt8uzQ&s",
-        alt: "StarVaders",    
+        alt: "StarVaders",
     },
     {
         src: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQUCmfhJNu4ZIB-I7pdyNkykcWRFT4c8j5B--RoyyHjuaDZ05UAmOu2L6dsYSNZtyeg8uJc",
-        alt: "Pizza Tower",    
+        alt: "Pizza Tower",
     },
     {
         src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8CKh20gztPQ-bjHIY5fAD8Qa1BZusihQvfkocWEnzT2IUnkx4NEjcnIlEu1ST31RnCT_ecw",
-        alt: "Shovel Knight",    
+        alt: "Shovel Knight",
     },
     {
         src: "https://upload.wikimedia.org/wikipedia/en/5/51/Overwatch_cover_art.jpg",
-        alt: "Overwatch",    
+        alt: "Overwatch",
     },
-
-    
-]
+];
 ---
 
 <Layout title="About">
-    <main>
-        <h1>About</h1>
+    <main
+        class="max-w-4xl mx-auto px-6 py-16 text-white text-lg leading-relaxed"
+    >
+        <h1 class="text-5xl md:text-6xl font-bold text-center mb-16">About</h1>
 
-        <h2 class="text-3xl text-blue-100 font-semibold"> Interests </h2>
-        <div class="my-10">
-            <p class="text-2xl">Video games, books, cooking, watching sports (NFL, NBA), retrohandhelds, tinkering, VR, comedy</p>
-            <br>
-            <ul>
-                <li> Though not necessarily an interest, I have recently started running/jogging with the Couch To 5K program</li>
-            </ul>
-        </div>
-        
+        <section class="mb-16">
+            <h2 class="text-3xl text-blue-100 font-semibold mb-6">Interests</h2>
 
-            <span class="my-6 text-blue-300 text-3xl">Currently Reading  </span>
-            <div class="flex flex-row mx-24 my-10 ">
+            <div class="flex flex-wrap gap-3">
+                {
+                    interests.map((interest) => (
+                        <span class="bg-gray-700 text-gray-200 px-4 py-1.5 rounded-full text-base font-medium">
+                            {interest}
+                        </span>
+                    ))
+                }
+            </div>
 
+            <p class="mt-6 text-gray-300">
+                Ran my first 5k Race, training for more!
+            </p>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl text-blue-100 font-semibold mb-6">
+                Currently Reading
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {
                     books.map((book) => (
-                        <div class="flex mx-3">
-                            <Image src={book.src} alt={book.alt} height="200" width="200" />
+                        <div class="aspect-[2/3]">
+                            <Image
+                                src={book.src}
+                                alt={book.alt}
+                                width="200"
+                                height="300"
+                                class="w-full h-full object-cover rounded-lg shadow-lg"
+                            />
                         </div>
-                        ))
+                    ))
                 }
-             </div>
-        <div>
-            <span class="my-6 text-blue-300 text-3xl">Currently Playing  </span>
-            <div class="flex flex-row flex-wrap mx-24 my-10 ">
+            </div>
+        </section>
 
+        <section class="mb-16">
+            <h2 class="text-3xl text-blue-100 font-semibold mb-6">
+                Currently Playing
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {
-                    games.map(game => (
-                        <div class="flex m-4">
-                            <Image src={game.src} alt={game.alt} height="300" width="300" />
+                    games.map((game) => (
+                        <div class="aspect-square">
+                            <Image
+                                src={game.src}
+                                alt={game.alt}
+                                width="300"
+                                height="300"
+                                class="w-full h-full object-cover rounded-lg shadow-lg"
+                            />
                         </div>
-                        )
-                    )
+                    ))
                 }
-             </div>
-        </div>
-
+            </div>
+        </section>
     </main>
-
 </Layout>
-
-
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 1400px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-</style>

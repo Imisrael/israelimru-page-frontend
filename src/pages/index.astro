@@ -13,8 +13,8 @@ const articles = await fetchApi<Article[]>({
 const fixstars = {
 	title: "Software Engineer @ Fixstars Solutions, Inc.",
 	link: "https://us.fixstars.com/",
-	body: `I am a Full Stack Engineer with 5 years of experience in building and deploying scalable applications. I specialize in the entire development lifecycle, from concept to deployment, and I'm passionate about creating elegant and efficient solutions to complex problems.`,
-	color: "#23262d"
+	body: `Full Stack Developer with over 10 years of hands-on experience at a single high-growth tech company. Possesses a comprehensive, ground-up understanding of the entire software stack, having progressed from Customer Support to Backend Engineering. Proven expertise in building modern React frontends, developing backend services, and bridging the gap between user needs and technical implementation.`,
+	color: "#23262d",
 };
 
 const projects = [
@@ -22,108 +22,105 @@ const projects = [
 		title: "GridDB Cloud CLI Tool",
 		link: "https://github.com/Imisrael/griddb-cloud-cli",
 		body: `Architected and built a standalone CLI tool to simplify GridDB Cloud management, featuring interactive table creation and automated CSV ingestion with intelligent data type mapping.`,
-		color: "#4a6002" 
+		color: "#4a6002",
+	},
+	{
+		title: "FFTiers Checker",
+		link: "https://github.com/Imisrael/FFTiers-Checker",
+		body: `Tool purpose-built to search and parse fantasy football players and their tiers for the week based on math done Boris Chen: https://www.borischen.co/. Built with a go multithread fetcher, a pocketbase backend, and a TanStack Query frontend`,
+		color: "#4a6002",
 	},
 	{
 		title: "GridLog",
 		link: "https://github.com/griddbnet/gridlog/tree/part-iii",
 		body: `Full Stack application using: GridDB, Spring Boot, React.js. GridLog polls log files on host machine, takes the raw logs, saves into DB, then takes the raw logs from the DB, parses it, and converts into fieldable logs using regex. Log Viewer allows you to see these logs and to query them with a query builder. Still WIP. Recently added Classical Machine Learning Classification on incoming Logs as an marketing tool.`,
-		color: "#4a6002" 
+		color: "#4a6002",
 	},
-	{
-		title: "Udemy Course on IoT Projects",
-		link: "https://www.udemy.com/course/create-a-working-iot-project-with-iot-database-griddb",
-		body: `GridDB course meant to market the database to a new audience, namely an IoT focused audience.`,
-		color: "#4a6002" 
-	},
+
 	{
 		title: "This website",
 		link: "/",
 		body: `Portfolio type website. Built with Astro, CMS built with Strapi on Railway, static content hosted on Netlify. Blogs below gathered from https://griddb.net using simple node.js script`,
-		color: "#4a6002" 
-	}
+		color: "#4a6002",
+	},
 ];
 ---
 
 <Layout title="Israel Imru">
-	<main>
-		<h1>Israel Imru</h1>
+	<main
+		class="max-w-3xl mx-auto px-6 py-16 text-white text-lg leading-relaxed"
+	>
+		<h1 class="text-5xl md:text-6xl font-bold text-center mb-6">
+			Israel Imru
+		</h1>
 
-		<span class="text-3xl text-blue-200 underline decoration-sky-500"> <a href="/about"> About Page  <i class="fa-solid fa-link text-md"></i> </a></span>
+		<div class="text-center mb-16">
+			<a
+				href="/about"
+				class="text-2xl text-blue-200 underline decoration-sky-500 hover:text-blue-100 transition-colors"
+			>
+				About Page
+				<i class="fa-solid fa-link text-sm align-middle"></i>
+			</a>
+			<a
+				href="https://github.com/Imisrael"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-2xl text-blue-200 underline decoration-sky-500 hover:text-blue-100 transition-colors"
+			>
+				GitHub
+				<i class="fa-brands fa-github text-sm align-middle"></i>
+			</a>
+		</div>
 
-		<div class="mx-3 my-20">
-			<h2 class="text-neutral-200 text-3xl my-5"> Employment </h2>
-			<div class="my-6" >
+		<section class="mb-16">
+			<h2 class="text-3xl font-semibold text-neutral-200 mb-6">
+				Employment
+			</h2>
+			<div class="my-6">
 				<Card
-				href={fixstars.link}
-				title={fixstars.title}
-				body={fixstars.body}
-				color={fixstars.color}
-			/>
+					href={fixstars.link}
+					title={fixstars.title}
+					body={fixstars.body}
+					color={fixstars.color}
+				/>
 			</div>
-		</div>
-		<div class="mx-3 my-20">
-		<h2 class="text-neutral-200  text-3xl my-5"> Projects</h2>
-		<div class="my-6" >
+		</section>
 
-			{
-				projects.map((project) => (
-					<Card
-						href={project.link}
-						title={project.title}
-						body={project.body}
-						color={project.color}
-					/>
-				))
-			}
+		<section class="mb-16">
+			<h2 class="text-3xl font-semibold text-neutral-200 mb-6">
+				Projects
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{
+					projects.map((project) => (
+						<Card
+							href={project.link}
+							title={project.title}
+							body={project.body}
+							color={project.color}
+						/>
+					))
+				}
+			</div>
+		</section>
 
-
-		</div>
-</div>
-
-<div class="mx-3 my-20"> 
-		<h2 class="text-neutral-200 text-3xl my-5"> Blogs</h2>
-		<ol class="list-decimal">
-			{
-				articles.map((article) => (
-					<li class="my-2 text-blue-200 hover:text-sky-400">
-						<a href={`/blog/${article.attributes.slug}/`}>
-							{article.attributes.title}
-						</a>
-					</li>
-				))
-			}
-
-
-		</ol>
-		</div>
+		<section class="mb-16">
+			<h2 class="text-3xl font-semibold text-neutral-200 mb-6">Blogs</h2>
+			<ol class="list-decimal list-inside space-y-3">
+				{
+					articles.map((article) => (
+						<li>
+							<a
+								href={`/blog/${article.attributes.slug}/`}
+								class="text-blue-200 hover:text-sky-400 transition-colors underline decoration-sky-500/50 hover:decoration-sky-400"
+							>
+								{article.attributes.title}
+							</a>
+						</li>
+					))
+				}
+			</ol>
+		</section>
 	</main>
 </Layout>
-
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-</style>
