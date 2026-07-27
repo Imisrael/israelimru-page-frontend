@@ -1,14 +1,13 @@
 ---
+// → replaces: src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 
-import fetchApi from "../lib/strapi";
-import type Article from "../interfaces/article";
+import { getCollection } from "astro:content";
 
-const articles = await fetchApi<Article[]>({
-	endpoint: "articles", // the content type to fetch
-	wrappedByKey: "data", // the key to unwrap the response
-});
+const articles = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 const fixstars = {
 	title: "Full Stack Engineer @ Fixstars Solutions, Inc.",
@@ -36,11 +35,10 @@ const projects = [
 		body: `Full Stack application using: GridDB, Spring Boot, React.js. GridLog polls log files on host machine, takes the raw logs, saves into DB, then takes the raw logs from the DB, parses it, and converts into fieldable logs using regex. Log Viewer allows you to see these logs and to query them with a query builder. Still WIP. Recently added Classical Machine Learning Classification on incoming Logs as an marketing tool.`,
 		color: "#4a6002",
 	},
-
 	{
 		title: "This website",
 		link: "/",
-		body: `Portfolio type website. Built with Astro, CMS built with Strapi on Railway, static content hosted on Netlify. Blogs below gathered from https://griddb.net using simple node.js script`,
+		body: `Portfolio site built with Astro and hosted on Netlify. Blog posts are local markdown rendered via Astro content collections — no CMS, no database, no runtime dependencies (retired an earlier Strapi-on-Railway setup in favor of just committing files).`,
 		color: "#4a6002",
 	},
 ];
@@ -112,10 +110,10 @@ const projects = [
 					articles.map((article) => (
 						<li>
 							<a
-								href={`/blog/${article.attributes.slug}/`}
+								href={`/blog/${article.id}/`}
 								class="text-blue-200 hover:text-sky-400 transition-colors underline decoration-sky-500/50 hover:decoration-sky-400"
 							>
-								{article.attributes.title}
+								{article.data.title}
 							</a>
 						</li>
 					))
