@@ -1,34 +1,20 @@
 ---
-import fetchApi from "../../lib/strapi";
-import type Article from "../../interfaces/article";
+// → replaces: src/pages/blog/[slug].astro
+import { getCollection, render } from "astro:content";
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 
-import { marked } from "marked";
-
 export async function getStaticPaths() {
-  const articles = await fetchApi<Article[]>({
-    endpoint: "articles",
-    wrappedByKey: "data",
-  });
-
-  return articles.map((article) => ({
-    params: { slug: article.attributes.slug },
-    props: article,
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
   }));
 }
-type Props = Article;
 
-const article = Astro.props;
+const { post } = Astro.props;
+const { Content } = await render(post);
 ---
 
-
-
-<BlogPostLayout title={article.attributes.title}>
-  <main class="m-auto text-white">
-    <Fragment set:html={marked.parse(article.attributes.content)} />
-  </main>
+<BlogPostLayout title={post.data.title}>
+  <Content />
 </BlogPostLayout>
-
-<style>
-
-</style>
